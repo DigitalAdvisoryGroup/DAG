@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<data>
+    <template id="ct_language_selector" inherit_id="portal.portal_show_sign_in" active="False" customize_show="True" name="Language selector">
+        <xpath expr="//ul[@id='top_menu']" position="inside">
+          <li>
+          <div class="dropdown">
+              <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                  <span t-esc="list(filter(lambda lg : lg[0] == lang, languages))[0][1].split('/').pop()"/>
+                  <span class="caret ml4"/>
+              </button>
+              <div class="dropdown-menu" role="menu">
+                  <t t-foreach="languages" t-as="lg">
+                      <a t-att-href="url_for(request.httprequest.path + '?' + keep_query(), lang=lg[0])" class="dropdown-item js_change_lang" t-att-data-default-lang="(editable or translatable) and 'true' if website and lg[0] == website.default_lang_code else None" t-att-data-lang="lg[0]">
+                          <t t-esc="lg[1].split('/').pop()"/>
+                      </a>
+                  </t>
+              </div>
+          </div>
+      </li>
+        </xpath>
+    </template>
+</data>
+</odoo>
